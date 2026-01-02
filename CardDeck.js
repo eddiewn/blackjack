@@ -1,10 +1,11 @@
 export class CardDeck {
     constructor() {
         this.cards = [];
+        this.discarded = [];
     }
 
     createDeck() {
-        const suits = ["H", "D", "C", "S"];
+        const suits = ["Heart", "Diamond", "Club", "Spade"];
         const values = [
             "2",
             "3",
@@ -21,9 +22,18 @@ export class CardDeck {
             "Ace",
         ];
 
+        function getValue(value){
+            if(["Jack", "Queen", "King"].includes(value)) return 10;
+            if(["Ace"].includes(value)) return 11;
+            return Number(value);
+        }
+
         for (let i = 0; i < suits.length; i++) {
             for (let j = 0; j < values.length; j++) {
-                this.cards.push(`${suits[i]}${values[j]}`);
+                this.cards.push({
+                    name: (suits[i] + values[j]),
+                    value: getValue(values[j]),
+                });
             }
         }
         this.shuffle(this.cards);
@@ -39,8 +49,8 @@ export class CardDeck {
         return array;
     };
 
-    addCard(card) {
-        this.cards.push(card);
+    discard(card) {
+        this.discarded.push(card);
     }
 
     removeCard(card) {
