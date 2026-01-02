@@ -4,22 +4,45 @@ export class CardDeck {
     }
 
     createDeck() {
-        const suits = ['H', 'D', 'C', 'S'];
-        const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
+        const suits = ["H", "D", "C", "S"];
+        const values = [
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "Jack",
+            "Queen",
+            "King",
+            "Ace",
+        ];
 
         for (let i = 0; i < suits.length; i++) {
             for (let j = 0; j < values.length; j++) {
-                this.cards.push(`${suits[i]}${values[j]}`)
+                this.cards.push(`${suits[i]}${values[j]}`);
             }
-            
         }
-        console.log(this.cards)
+        this.shuffle(this.cards);
+        console.log(this.cards);
     }
+
+    shuffle = (array) => {
+        for (let i = array.length - 1; i >= 0; i--) {
+            const randomIndex = Math.floor(Math.random() * (i + 1));
+            array.push(array[randomIndex]);
+            array.splice(randomIndex, 1);
+        }
+        return array;
+    };
 
     addCard(card) {
         this.cards.push(card);
-    }   
-    
+    }
+
     removeCard(card) {
         const index = this.cards.indexOf(card);
         if (index > -1) {
