@@ -53,10 +53,8 @@ export class CardDeck {
         this.discarded.push(card);
     }
 
-    removeCard(card) {
-        const index = this.cards.indexOf(card);
-        if (index > -1) {
-            this.cards.splice(index, 1);
-        }
+    removeCard() {
+        const card = this.cards.pop();
+        return card;
     }
 }
